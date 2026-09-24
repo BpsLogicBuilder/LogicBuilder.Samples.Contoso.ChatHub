@@ -1,0 +1,6 @@
+services:
+  contoso.chathub:
+    image: ${DOCKER_REGISTRY-}contosochathub
+    build:
+      context: .
+      dockerfile: Contoso.ChatHub/Dockerfile
