@@ -1,0 +1,44 @@
+name: CD
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: "10.0.x"
+  NODE_VERSION: "22.x"
+  PROJECT_NAME: "LogicBuilder.Samples.Contoso.ChatHub"
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          source-url: https://nuget.pkg.github.com/bpsLogicBuilder/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+
+      - name: Run unit tests
+        run: |
+          dotnet test Contoso.ChatHub.Flow.Test/Contoso.ChatHub.Flow.Test.csproj --verbosity normal --configuration Release
+          dotnet test Contoso.ChatHub.Test/Contoso.ChatHub.Test.csproj --verbosity normal --configuration Release
