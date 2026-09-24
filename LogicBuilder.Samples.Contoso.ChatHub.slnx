@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="global.json" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="Contoso.ChatHub.Flow/Contoso.ChatHub.Flow.csproj" />
+    <Project Path="Contoso.ChatHub/Contoso.ChatHub.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="Contoso.ChatHub.Flow.Test/Contoso.ChatHub.Flow.Test.csproj" />
+    <Project Path="Contoso.ChatHub.Test/Contoso.ChatHub.Test.csproj" />
+  </Folder>
+</Solution>

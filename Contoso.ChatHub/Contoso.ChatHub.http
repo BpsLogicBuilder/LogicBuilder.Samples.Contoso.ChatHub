@@ -1,0 +1,6 @@
+@Contoso.ChatHub_HostAddress = http://localhost:5120
+
+GET {{Contoso.ChatHub_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
