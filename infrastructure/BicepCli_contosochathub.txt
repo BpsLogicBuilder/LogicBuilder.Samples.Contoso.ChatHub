@@ -1,0 +1,7 @@
+$rg = "<rg>"
+$acrName="<acrName>"
+$imageTag="v1.0.0"
+
+az acr build --registry $acrName --image "contosochathub:${imageTag}" --image contosochathub:latest --file ./Contoso.ChatHub/Dockerfile .
+
+az deployment group create --resource-group $rg --template-file infrastructure/contosochathub.bicep --parameters imageTag="$imageTag" foundryProjectEndpoint="<endpoint>"
