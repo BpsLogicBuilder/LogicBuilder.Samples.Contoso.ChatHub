@@ -25,7 +25,8 @@ builder.Services.AddCors(options =>
         {
             policy.WithOrigins(allowedOrigins)
                   .WithMethods("GET", "POST", "PUT", "DELETE")
-                  .WithHeaders("Content-Type", "Authorization");
+                  .WithHeaders("Content-Type", "Authorization", "x-requested-with", "x-signalr-user-agent")
+                  .AllowCredentials();
         }
     });
 });

@@ -108,12 +108,14 @@ resource chatHubService 'Microsoft.App/containerApps@2026-01-01' = {
           allowedHeaders: [
             'Content-Type'
             'Authorization'
+            'X-Requested-With'
+            'X-Signalr-User-Agent'
           ]
           exposeHeaders: [
             '*'
           ]
           maxAge: 300
-          allowCredentials: false
+          allowCredentials: true
         }
       }
       registries: [
