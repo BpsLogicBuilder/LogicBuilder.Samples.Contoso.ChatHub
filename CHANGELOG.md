@@ -1,3 +1,4 @@
+* 2026-10-14 - AB#234: Add AKS CD workflow.
 * 2026-10-13 - AB#233: make CORS setting appropriate for SignalR client.
 * 2026-10-12 - AB#233: Add CD workflow.
 * 2026-09-24 - AB#229: Excluding dotnet-sonarscanner code coverage.
