@@ -1,3 +1,4 @@
+* 2026-11-17 - AB#269: Fix test failures.
 * 2026-11-17 - AB#269: Turn on Application Insights.
 * 2026-10-16 - AB#246: Rename cd-aks.yaml to cd-aks.yml.
 * 2026-10-14 - AB#234: Add AKS CD workflow.
