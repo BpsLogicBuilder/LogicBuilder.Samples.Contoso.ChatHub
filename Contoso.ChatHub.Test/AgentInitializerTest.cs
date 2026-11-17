@@ -45,12 +45,27 @@ namespace Contoso.ChatHub.Test
         public void Inilitialize_SetsAIAgent_FromFlowResponse()
         {
             var agentMock = new Mock<AIAgent>();
+            OpenTelemetryAgent telemetryAgent = (OpenTelemetryAgent)agentMock.Object.AsBuilder()
+                .UseOpenTelemetry(sourceName: "Contoso.ChatHub", configure: cfg =>
+                {
+                    cfg.EnableSensitiveData = false;
+                })
+                .Build();
+
             var response = new GetAgentResponse { AIAgent = agentMock.Object };
             var (initializer, _) = CreateInitializer(response);
 
             initializer.Inilitialize("some-agent");
+            
+            Assert.Same(telemetryAgent.Id, ((OpenTelemetryAgent)initializer.AIAgent).Id);
+        }
 
-            Assert.Same(agentMock.Object, initializer.AIAgent);
+        [Fact]
+        public void Inilitialize_ThrowsInvalidOperationException_WhenGetAgentResponseAIAgent_IsNull()
+        {
+            var response = new GetAgentResponse { AIAgent = null };
+            var (initializer, _) = CreateInitializer(response);
+            Assert.Throws<InvalidOperationException>(() => initializer.Inilitialize("some-agent"));
         }
 
         [Fact]
